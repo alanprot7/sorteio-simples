@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+<title>Sorteio</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+    label {
+    	color: #fff;
+    }
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #1e3a5f;
+        border-radius: 15px;
+        text-align: center;
+    }
+    h1 {
+        color: white;
+        font-size: 50px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+    input[type="text"], button {
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        text-transform: uppercase;
+    }
+    button {
+        background-color: #1e3a5f;
+        color: white;
+        cursor: pointer;
+    }
+    .result {
+        border: 5px solid #4CAF50;
+        border-radius: 50%;
+        font-size: 35px;
+        padding: 20px;
+        margin-top: 20px;
+        display: inline-block;
+        color: #fff;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Sorteio</h1>
+    <label for="letra">Digite uma Letra</label><br>
+    <input type="text" id="letra" maxlength="1"><br>
+    <label for="numero">Digite um Número</label><br>
+    <input type="text" id="numero" maxlength="2"><br>
+    <button onclick="sortear()">Sortear</button>
+    <div id="resultado" class="result" style="display: none;"></div>
+</div>
+
+<script>
+function sortear() {
+    var letraDigitada = document.getElementById('letra').value.toUpperCase();
+    var numeroDigitado = parseInt(document.getElementById('numero').value);
+
+    var letraSorteada = '';
+    var numeroSorteado = '';
+
+    var resultDiv = document.getElementById('resultado');
+    var i = 0;
+    var interval = setInterval(function() {
+
+        resultDiv.textContent = letraDigitada + numeroDigitado;
+        resultDiv.style.display = 'block';
+
+        let letraSorteada = String.fromCharCode(Math.floor(Math.random() * (letraDigitada.charCodeAt(0) - 65 + 1)) + 65);
+
+        let numeroSorteado = Math.floor(Math.random() * numeroDigitado) + 1
+
+        resultDiv.textContent = letraSorteada + numeroSorteado;
+        
+        i++
+
+        if (i > 40) {
+            clearInterval(interval);
+        }
+    }, 200);
+}
+</script>
+
+</body>
+</html>
